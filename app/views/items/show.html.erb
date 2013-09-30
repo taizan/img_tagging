@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @item.name %>
+</p>
+
+<%= image_tag @item.avatar.url(:medium ) %>
+
+<p>
+  <b>Id:</b>
+  <%= @item.id %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= @item.author %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
