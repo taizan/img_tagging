@@ -1,11 +1,11 @@
-usage
-set up
+= usage
+== set up
  bundle install
  rake db:create
  rake db:migrate
 
-List of items
+== List of items
 /items
 
-List of tags
+== List of tags
 /tags
