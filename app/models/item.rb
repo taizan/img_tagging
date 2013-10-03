@@ -12,8 +12,8 @@ class Item < ActiveRecord::Base
 		}
 	}
 
-	attr_accessible :author, :id, :name , :avatar , :ini_tag
-	attr_accessor :ini_tag #tag初期化用データベースにはカラムなし
+	attr_accessible :author, :id, :name , :avatar,:tag_txt
+	attr_accessor :tag_txt #tag初期化用データベースにはカラムなし
 
 	acts_as_taggable
 

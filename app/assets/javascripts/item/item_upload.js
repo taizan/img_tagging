@@ -22,9 +22,9 @@ $(function(){
   }
 
   // Setup the dnd listeners.
-  var dropZone = $('#drop_zone');
-  if ( dropZone){
+	var dropZone = $('#drop_zone');
+	if ( dropZone[0]){
 		dropZone[0].addEventListener('dragover', handleDragOver, false);
-  	dropZone[0].addEventListener('drop', handleFileSelect, false);
+	  	dropZone[0].addEventListener('drop', handleFileSelect, false);
 	}
 });

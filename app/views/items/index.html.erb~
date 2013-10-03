@@ -2,22 +2,17 @@
 
 
 <% @items.each do |item| %>
-	<%= link_to image_tag(item.avatar.url(:thumb ) ), item %>
+	<%= link_to image_tag(item.avatar.url(:thumb)), item %>
 	<%= item.name %>
  	<%= item.id %>
   	<%= item.author %>
 	Tags:  <%= raw item.tags.map { |t| link_to t, items_path(:tag => t.name) }.join(', ') %>
 	
-	<%= link_to 'Edit', edit_item_path(item) %>
-
-	<%= form_for(item) do |f| %>
-		<%= f.text_field :ini_tag %>
-		<%= f.submit "add_tag" %>
-	<% end %>
-	<%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
   <hr>
 <% end %>
 
 <br />
 
 <%= link_to 'New Item', new_item_path %>
+
+<%= render 'form' %>

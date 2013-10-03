@@ -6,49 +6,41 @@ class ItemsController < ApplicationController
   def index
 		if params[:tag]
 			@items = Item.tagged_with( params[:tag] )
-			set_ini_tag
+		#else if params[:search_word]
 		else
 			@items = Item.all
-			set_ini_tag
 		end
+		get_tag_all
+		
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @items }
-    end
+    @item = Item.new
+		set_format
   end
 
   # GET /items/1
   # GET /items/1.json
   def show
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @item }
-    end
+		get_tag
+		set_format
   end
 
   # GET /items/new
   # GET /items/new.json
   def new
     @item = Item.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @item }
-    end
+		set_format
   end
 
   # GET /items/1/edit
   def edit
-
+		get_tag
   end
 
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(params[:item])
-		@item.tag_list= params[:item][:ini_tag]
+		@item = Item.new(params[:item])
+		set_tag
 
     respond_to do |format|
       if @item.save
@@ -64,6 +56,7 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.json
   def update
+		set_tag
     respond_to do |format|
       if @item.update_attributes(params[:item])
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
@@ -78,6 +71,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
+		@item.destroy
 
     respond_to do |format|
       format.html { redirect_to items_url }
@@ -89,12 +83,26 @@ class ItemsController < ApplicationController
 		
 	def get_model
 		@item = Item.find(params[:id])
-		@item[:ini_tag] = @item.tag_list.join(',')
 	end
 
-	def set_ini_tag
+	def get_tag
+		@item[:tag_txt] = @item.tag_list.join(',')
+	end
+
+	def set_tag
+		@item.tag_list= params[:item][:tag_txt]
+	end
+
+	def get_tag_all
 		@items.each do |item|
-			item[:ini_tag] = item.tag_list.join(',')
+			item[:tag_txt] = item.tag_list.join(',')
 		end
+	end
+
+	def set_format
+		respond_to do |format|
+      format.html
+      format.json { render json: @item }
+    end
 	end
 end

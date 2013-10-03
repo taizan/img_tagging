@@ -1,5 +1,7 @@
 Mytag::Application.routes.draw do
-  get 'tags/:tag', to: 'item#index', as: :tag
+  get 'tags/:tag', to: 'items#index', as: :tag
+	get 'tags', to: 'tags#index'
+	#get 'tags/:key' to: 'tag#index' , as: :key
 
   resources :items do
 		member do

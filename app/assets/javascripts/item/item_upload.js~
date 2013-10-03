@@ -1,3 +1,4 @@
+$(function(){
   function handleFileSelect(evt) {
     evt.stopPropagation();
     evt.preventDefault();
@@ -21,6 +22,9 @@
   }
 
   // Setup the dnd listeners.
-  var dropZone = document.getElementById('drop_zone');
-  dropZone.addEventListener('dragover', handleDragOver, false);
-  dropZone.addEventListener('drop', handleFileSelect, false);
+  var dropZone = $('#drop_zone');
+  if ( dropZone){
+		dropZone[0].addEventListener('dragover', handleDragOver, false);
+  	dropZone[0].addEventListener('drop', handleFileSelect, false);
+	}
+});
