@@ -1,14 +1,10 @@
 Mytag::Application.routes.draw do
-  get 'tags/:tag', to: 'items#index', as: :tag
-	get 'tags', to: 'tags#index'
-	#get 'tags/:key' to: 'tag#index' , as: :key
+  match 'tags' => 'tags#index', :via => :get
+	#get 'tags/saerch/:q', to: 'tags#index', as: :q
 
-  resources :items do
-		member do
-		end
+	resources :items do
 		collection do
-			post 'search'
-			get 'search'
+#			get 'tag'
 		end
 	end
 		

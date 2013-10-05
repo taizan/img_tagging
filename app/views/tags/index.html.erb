@@ -1,5 +1,11 @@
+<%= link_to "item list", items_path %>
 <h1>Listing tags</h1>
 
+<%= form_tag tags_path ,method: :get do %>
+	<%= text_field_tag "q",params[:q] %>
+	<%= submit_tag "検索"%>
+<% end %>
+  <hr>
 
 <% @tags.each do |tag| %>
  	<%= tag.id %>
