@@ -1,4 +1,5 @@
 Mytag::Application.routes.draw do
+	root :to => 'items#index'
   match 'tags' => 'tags#index', :via => :get
 	#get 'tags/saerch/:q', to: 'tags#index', as: :q
 

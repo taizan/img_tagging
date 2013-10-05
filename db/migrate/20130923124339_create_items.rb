@@ -4,6 +4,7 @@ class CreateItems < ActiveRecord::Migration
       t.string :name
       t.integer :id
       t.string :author
+      t.integer :point ,:default => 0
 
       t.timestamps
     end

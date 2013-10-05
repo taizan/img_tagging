@@ -4,11 +4,12 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-		if params[:tag]
+		if params[:tag] then
 			@items = Item.tagged_with( params[:tag] )
-		#else if params[:search_word]
+		elsif params[:order] then
+			@items = Item.order(params[:order])
 		else
-			@items = Item.all
+			@items = Item.order('created_at DESC')
 		end
 		get_tag_all
 		

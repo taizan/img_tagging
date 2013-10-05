@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Id:</b>
+  <%= @item.id %>
   <b>Name:</b>
   <%= @item.name %>
 </p>
@@ -13,10 +15,6 @@ Tags:  <%= raw @item.tags.map { |t| link_to t, items_path(:tag => t.name) }.join
 
 <%= image_tag @item.avatar.url(:large ) %>
 
-<p>
-  <b>Id:</b>
-  <%= @item.id %>
-</p>
 
 <p>
   <b>Author:</b>

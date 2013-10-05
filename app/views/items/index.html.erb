@@ -1,21 +1,25 @@
 <%= javascript_include_tag 'item/item_upload.js' , :defer=>"defer" %>
 
-<%= link_to "tag list", tags_path %>
-<h1>Listing items</h1>
-<hr>
+<div id="items_list">
+	<%= link_to "タグ一覧", tags_path %>
+	<%= link_to '新規作成', new_item_path %>
+	<h1>一覧</h1>
+	<hr>
 
-<% @items.each do |item| %>
-	<%= link_to image_tag(item.avatar.url(:thumb)), item %>
-	<%= item.name %>
- 	<%= item.id %>
-  	<%= item.author %>
-	Tags:  <%= raw item.tags.map { |t| link_to t, items_path(:tag => t.name) }.join(', ') %>
-	
-  <hr>
-<% end %>
+	<% @items.each do |item| %>
+		<p>
+			<%= item.id %> : <%= item.name %> by:  <%= item.author %> 
+		</p>
+		<%= link_to image_tag(item.avatar.url(:thumb)), item %>
+		<p>	
+			Tags:  <%= raw item.tags.map { |t| link_to t, items_path(:tag => t.name) }.join(', ') %>
+		</p>
+		<hr>
+	<% end %>
+</div>
 
-<br />
+<div id="new_item_form" >
+	<h1>新規</h1>
+	<%= render 'form' %>
+</div>
 
-<%= link_to 'New Item', new_item_path %>
-
-<%= render 'form' %>
