@@ -1,3 +1,6 @@
+
+<% javascript_include_tag 'item/items.js.coffee' , :defer=>"defer" %>
+
 <div id="drop_zone"> 
 <%= form_for(@item) do |f| %>
   <% if @item.errors.any? %>
@@ -29,7 +32,12 @@
 
   <div class="field">
   	<%= f.label "タグ" %><br />
-  	<%= f.text_field :tag_txt%>
+  	<%= f.hidden_field :tag_txt%>
+		<input class="tag_input">
+		<input class="tag_input">
+		<input class="tag_input">
+		<input class="tag_input">
+		<input class="tag_input">
 	</div>
 
   <div class="actions">
