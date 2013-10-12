@@ -7,10 +7,12 @@
   <%= @item.name %>
 </p>
 
-Tags:  <%= raw @item.tags.map { |t| link_to t, items_path(:tag => t.name) }.join(', ') %>
-<%= form_for(@item) do |f| %>
-	<%= f.text_field :tag_txt %>
-	<%= f.submit "add_tag" %>
+Tags:  <div id="item_tag"> 
+	<%= raw @item.tags.map { |t| link_to t, items_path(:tag => t.name) }.join(' ') %> 
+</div>
+<%= form_tag item_path(@item), :remote => true , :method => :put do %>
+	<%= text_field_tag :adding_tag %>
+	<%= submit_tag "add_tag" %>
 <% end %>
 
 <%= image_tag @item.avatar.url(:large ) %>

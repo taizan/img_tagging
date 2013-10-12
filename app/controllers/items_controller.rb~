@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
 	before_filter :get_model, :only => [:show, :edit, :update, :destroy]
-# GET /items
-# GET /items.json
-	def index
+
+  # GET /items
+  # GET /items.json
+  def index
 		if params[:tag] then
 			@items = Item.tagged_with( params[:tag] )
 		elsif params[:order] then
@@ -56,19 +57,17 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.json
   def update
-		#set_tag
-		@item.tag_list.add( params[:adding_tag] )
-
-		respond_to do |format|
-			if @item.update_attributes(params[:item])
-				format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-				format.js
-				format.json { head :no_content }
-			else
-				format.html { render action: "edit" }
-				format.json { render json: @item.errors, status: :unprocessable_entity }
-			end
-		end
+		set_tag
+		render
+		#    respond_to do |format|
+#      if @item.update_attributes(params[:item])
+#        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+#        format.json { head :no_content }
+#      else
+#        format.html { render action: "edit" }
+#        format.json { render json: @item.errors, status: :unprocessable_entity }
+#      end
+#    end
   end
 
   # DELETE /items/1

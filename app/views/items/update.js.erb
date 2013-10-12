@@ -1,0 +1,4 @@
+$("#item_tag").empty()
+<% @item.tags.each do |t| %>
+	$("#item_tag").append( '<%= raw link_to t,items_path(:tag => t.name)  %>' + ' ');
+<% end %>
