@@ -1,28 +1,30 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Id:</b>
-  <%= @item.id %>
   <b>Name:</b>
   <%= @item.name %>
+  <b>Author:</b>
+  <%= @item.author %>
+  <b>point:</b>
+  <%= @item.point %>
 </p>
 
-Tags:  <div id="item_tag"> 
-	<%= raw @item.tags.map { |t| link_to t, items_path(:tag => t.name) }.join(' ') %> 
-</div>
+
+<%= image_tag @item.avatar.url(:large ) %>
+<br>
+
+Tags:  <span id="item_tag"> <%= raw @item.tags.map { |t| link_to t, items_path(:tag => t.name) }.join(' ') %> </span>
 <%= form_tag item_path(@item), :remote => true , :method => :put do %>
 	<%= text_field_tag :adding_tag %>
 	<%= submit_tag "add_tag" %>
 <% end %>
 
-<%= image_tag @item.avatar.url(:large ) %>
-
-
 <p>
-  <b>Author:</b>
-  <%= @item.author %>
+  <b>Id:</b>
+	<%= @item.id %>
+  <b>at:</b>
+  <%= @item.created_at %>
 </p>
-
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

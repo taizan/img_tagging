@@ -1,5 +1,4 @@
 Mytag::Application.routes.draw do
-	root :to => 'items#index'
   match 'tags' => 'tags#index', :via => :get
 	#get 'tags/saerch/:q', to: 'tags#index', as: :q
 
@@ -10,6 +9,7 @@ Mytag::Application.routes.draw do
 	end
 		
 
+	root :to => 'items#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

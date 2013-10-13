@@ -12,9 +12,11 @@ class Item < ActiveRecord::Base
 		}
 	}
 
-	attr_accessible :author, :id, :name , :point , :avatar,:tag_txt
-	attr_accessor :tag_txt #tag初期化用データベースにはカラムなし
+	attr_accessible :author, :id, :name , :point , :avatar, :tag_txt
+	attr_accessor :tag_txt
 
 	acts_as_taggable
+
+	self.per_page = 8
 
 end

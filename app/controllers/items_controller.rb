@@ -4,11 +4,11 @@ class ItemsController < ApplicationController
 # GET /items.json
 	def index
 		if params[:tag] then
-			@items = Item.tagged_with( params[:tag] )
+			@items = Item.tagged_with( params[:tag] ).paginate(:page => params[:page])
 		elsif params[:order] then
-			@items = Item.order(params[:order])
+			@items = Item.paginate(:page => params[:page]).order(params[:order])
 		else
-			@items = Item.order('created_at DESC')
+			@items = Item.paginate(:page => params[:page]).order('created_at DESC')
 		end
 		get_tag_all
 		
@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
 		get_tag
+		@item.point += 1
 		set_format
   end
 
@@ -34,6 +35,7 @@ class ItemsController < ApplicationController
   # GET /items/1/edit
   def edit
 		get_tag
+		@item.point += 1
   end
 
   # POST /items

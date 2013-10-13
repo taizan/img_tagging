@@ -2,9 +2,10 @@
 <%= javascript_include_tag 'item/items.js' , :defer=>"defer" %>
 
 <div id="items_list">
+	<%= link_to "画像一覧", items_path %>
 	<%= link_to "タグ一覧", tags_path %>
 	<%= link_to '新規作成', new_item_path %>
-	<h1>一覧</h1>
+	<h1><%= params[:tag]%> 一覧</h1>
 	<hr>
 
 	<% @items.each do |item| %>
@@ -17,6 +18,9 @@
 		</p>
 		<hr>
 	<% end %>
+
+	<%= will_paginate @items %>
+	<hr>
 </div>
 
 <div id="new_item_form" >

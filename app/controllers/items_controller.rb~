@@ -1,15 +1,14 @@
 class ItemsController < ApplicationController
 	before_filter :get_model, :only => [:show, :edit, :update, :destroy]
-
-  # GET /items
-  # GET /items.json
-  def index
+# GET /items
+# GET /items.json
+	def index
 		if params[:tag] then
-			@items = Item.tagged_with( params[:tag] )
+			@items = Item.tagged_with( params[:tag] ).paginate(:page => params[:page])
 		elsif params[:order] then
-			@items = Item.order(params[:order])
+			@items = Item.order(params[:order]).paginate(:page => params[:page])
 		else
-			@items = Item.order('created_at DESC')
+			@items = Item.order('created_at DESC').paginate(:page => params[:page])
 		end
 		get_tag_all
 		
@@ -22,6 +21,7 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
 		get_tag
+		@item.point += 1
 		set_format
   end
 
@@ -35,6 +35,7 @@ class ItemsController < ApplicationController
   # GET /items/1/edit
   def edit
 		get_tag
+		@item.point += 1
   end
 
   # POST /items
@@ -57,17 +58,19 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.json
   def update
-		set_tag
-		render
-		#    respond_to do |format|
-#      if @item.update_attributes(params[:item])
-#        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-#        format.json { head :no_content }
-#      else
-#        format.html { render action: "edit" }
-#        format.json { render json: @item.errors, status: :unprocessable_entity }
-#      end
-#    end
+		#set_tag
+		@item.tag_list.add( params[:adding_tag] )
+
+		respond_to do |format|
+			if @item.update_attributes(params[:item])
+				format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+				format.js
+				format.json { head :no_content }
+			else
+				format.html { render action: "edit" }
+				format.json { render json: @item.errors, status: :unprocessable_entity }
+			end
+		end
   end
 
   # DELETE /items/1

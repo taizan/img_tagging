@@ -3,7 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
 	$("form").submit ->
-		tag = ""
+		tag =  $("#item_name").val() + ',' + $("#item_author").val() + ','
+		#tag = ""
 		for tag_input in $(".tag_input")
 			tag += tag_input.value + ","
 		$("#item_tag_txt").val tag

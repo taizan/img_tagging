@@ -4,6 +4,7 @@ gem 'rails', '3.2.13'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+gem 'will_paginate', '~> 3.0'
 gem 'paperclip'
 gem 'acts-as-taggable-on'
 
